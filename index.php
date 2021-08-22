@@ -50,13 +50,13 @@ if (isset($_GET["SS"])) {
                     <a aria-current="page" class="nav-link" href="index.php">Anasayfa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?SS=1">Filmler</a>
+                    <a class="nav-link" href="index.php?SS=6">Filmler</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?SS=1">Diziler</a>
+                    <a class="nav-link" href="index.php?SS=7">Diziler</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?SS=1">Kitaplar</a>
+                    <a class="nav-link" href="index.php?SS=8">Kitaplar</a>
                 </li>
                 <li class="nav-item">
                     <a aria-disabled="true" class="nav-link disabled" href="#" tabindex="-1">Kapalı</a>
