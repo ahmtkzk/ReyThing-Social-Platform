@@ -37,7 +37,7 @@ if (isset($_GET["SS"])) {
 <!-- Menü -->
 <nav aria-label="Ninth navbar example" class="navbar navbar-expand-lg navbar-dark">
     <div class="container-xl">
-        <a class="navbar-brand" href="#" id="myLogo"><b>Rey</b>Thing</a>
+        <a class="navbar-brand" href="index.php" id="myLogo"><b>Rey</b>Thing</a>
         <button aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation"
                 class="navbar-toggler"
                 data-bs-target="#navbarsExample07XL" data-bs-toggle="collapse" type="button">
@@ -47,16 +47,16 @@ if (isset($_GET["SS"])) {
         <div class="collapse navbar-collapse" id="navbarsExample07XL">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" href="#">Anasayfa</a>
+                    <a aria-current="page" class="nav-link" href="index.php">Anasayfa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Filmler</a>
+                    <a class="nav-link" href="index.php?SS=1">Filmler</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Diziler</a>
+                    <a class="nav-link" href="index.php?SS=1">Diziler</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Kitaplar</a>
+                    <a class="nav-link" href="index.php?SS=1">Kitaplar</a>
                 </li>
                 <li class="nav-item">
                     <a aria-disabled="true" class="nav-link disabled" href="#" tabindex="-1">Kapalı</a>
@@ -74,11 +74,12 @@ if (isset($_GET["SS"])) {
             <form>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php
-
                     if (isset($_SESSION["Kullanici"])) {
                         echo $_SESSION["Kullanici"];
                         ?>
+
                         <a href="cikis.php">Çıkış yap</a>
+
                         <?php
                     } else {
 
@@ -100,12 +101,14 @@ if (isset($_GET["SS"])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a aria-current="page" class="nav-link" href="#">Kaydol</a>
+                            <a aria-current="page" class="nav-link" href="index.php?SS=3">Kaydol</a>
                         </li>
                         <li class="nav-item">
-                            <a aria-current="page" class="nav-link" href="#">Giriş Yap</a>
+                            <a aria-current="page" class="nav-link" href="index.php?SS=4">Giriş Yap</a>
                         </li>
+
                     <?php } ?>
+
                 </ul>
             </form>
         </div>
