@@ -1,10 +1,10 @@
 <?php
 
 $SayfaNumarasi[0] = "anasayfa.php";
-$SayfaNumarasi[1] = "";
-$SayfaNumarasi[2] = "";
-$SayfaNumarasi[3] = "";
-$SayfaNumarasi[4] = "";
+$SayfaNumarasi[1] = "kategori.php";
+$SayfaNumarasi[2] = "icerik.php";
+$SayfaNumarasi[3] = "kayit.php";
+$SayfaNumarasi[4] = "giris.php";
 $SayfaNumarasi[5] = "";
 $SayfaNumarasi[6] = "";
 $SayfaNumarasi[7] = "";
