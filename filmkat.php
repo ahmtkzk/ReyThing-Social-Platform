@@ -1,9 +1,21 @@
 <?php
 include("settings/db.php");
 
-$FilmCekSorguIlk3 = $Baglanti->prepare("select * from filmler order by id desc");
-$FilmCekSorguIlk3->execute();
-$Filmler = $FilmCekSorguIlk3->fetchAll(PDO::FETCH_ASSOC);
+$KatSayfaSayisi = @$_GET["SayfaSayisi"] + 1;
+
+$FilmCekSorguSay = $Baglanti->prepare("select * from filmler");
+$FilmCekSorguSay->execute();
+$FilmleriSay = $FilmCekSorguSay->rowCount();
+
+$SayfaSayisi = ceil($FilmleriSay / 12);
+
+if ($KatSayfaSayisi <= $SayfaSayisi) {
+    $SorguSayisi = 12 * ($KatSayfaSayisi - 1);
+}
+
+$FilmCekSorgu = $Baglanti->prepare("select * from filmler order by id desc limit $SorguSayisi,12");
+$FilmCekSorgu->execute();
+$Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -37,7 +49,7 @@ $Filmler = $FilmCekSorguIlk3->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col-md-4 mb-3 float-start">
                     <a href="#" class="alt-cizgisiz">
                         <div class="card m-auto" style="width: 18rem;">
-                            <img src="<?php echo $Rows["poster"];?>"
+                            <img src="<?php echo $Rows["poster"]; ?>"
                                  class="card-img-top" style="height: 425px">
                             <div class="card-footer bg-light">
                                 <div class="progress mt-1 mb-1">
@@ -47,7 +59,7 @@ $Filmler = $FilmCekSorguIlk3->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item fw-bold mt-2"><h5><?php echo $Rows["filmadi"];?></h5></li>
+                                <li class="list-group-item fw-bold mt-2"><h5><?php echo $Rows["filmadi"]; ?></h5></li>
                             </ul>
                         </div>
                     </a>
@@ -59,22 +71,89 @@ $Filmler = $FilmCekSorguIlk3->fetchAll(PDO::FETCH_ASSOC);
 
     </div>
 
+    <?php
 
-    <div class="row mt-5 mb-5">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Önceki</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Sonraki</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    if ($KatSayfaSayisi == 1) {
+        ?>
+        <div class="row mt-5 mb-5">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item active"><a class="page-link"
+                                                    href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi; ?>"><?php echo $KatSayfaSayisi; ?></a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                                             href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi; ?>"><?php echo $KatSayfaSayisi + 1; ?></a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                                             href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi + 1; ?>"><?php echo $KatSayfaSayisi + 2; ?></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo $SayfaSayisi -1?>">Son Sayfa</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <?php
+    } else if ($KatSayfaSayisi < $SayfaSayisi) {
+
+        ?>
+
+
+        <div class="row mt-5 mb-5">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo 0 ?>" tabindex="-1">İlk
+                            Sayfa</a>
+                    </li>
+
+                    <li class="page-item"><a class="page-link"
+                                             href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi - 2; ?>"><?php echo $KatSayfaSayisi - 1; ?></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link"
+                                                    href="#"><?php echo $KatSayfaSayisi; ?></a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                                             href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi; ?>"><?php echo $KatSayfaSayisi + 1; ?></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo $SayfaSayisi - 1 ?>">Son Sayfa</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <?php
+    } else if ($KatSayfaSayisi == $SayfaSayisi) {
+        ?>
+
+        <div class="row mt-5 mb-5">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo 0 ?>" tabindex="-1">İlk
+                            Sayfa</a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                                             href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi - 3; ?>"><?php echo $KatSayfaSayisi - 2; ?></a>
+                    </li>
+                    <li class="page-item"><a class="page-link"
+                                             href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi - 2; ?>"><?php echo $KatSayfaSayisi - 1; ?></a>
+                    </li>
+                    <li class="page-item active"><a class="page-link"
+                                                    href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi; ?>"><?php echo $KatSayfaSayisi; ?></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <?php
+    }
+
+    ?>
+
+
 </div>
 
 

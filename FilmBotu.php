@@ -1,6 +1,6 @@
 <?php
 include("settings/db.php");
-set_time_limit(1000);
+set_time_limit(100000);
 function getHTTPResponseStatusCode($url)
 {
     $status = null;
@@ -15,14 +15,15 @@ function file_get_contents_curl($url)
 {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-    $response = curl_exec($curl); //JSON bu değişkene atanacak.
-    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE); //Senin kod dediğin hata kodu da burada. Numerik olarak dönüş yapar.
+    $response = curl_exec($curl);
+    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
     return $response;
 }
 
+$sayac = 0;
 
-for ($i = 1; $i <= 1000; $i++) {
+for ($i = 0; $i <= 10000; $i++) {
     @$JSON = file_get_contents_curl('https://api.themoviedb.org/3/movie/' . $i . '?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=tr-TR');
 
     $URL = "https://api.themoviedb.org/3/movie/" . $i . "?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=tr-TR";
@@ -30,6 +31,7 @@ for ($i = 1; $i <= 1000; $i++) {
 
     $Item = json_decode($JSON);
 
+    $Item3 = json_decode($JSON, true);
     if ($Kod != "404 Not Found") {
         $Baslik = $Item->title;
         $OrjBaslik = $Item->original_title;
@@ -61,13 +63,32 @@ for ($i = 1; $i <= 1000; $i++) {
             if ($Item2['crew'][$k]['job'] == "Director") {
                 $Yonetmen = $Item2['crew'][$k]['name'];;
             }
+
+            $Turler = "";
+
+            for ($t = 0; $t < count($Item3['genres']); $t++) {
+                $Turler = $Turler . $Item3['genres'][$t]['name'] . ", ";
+                if ($t == (count($Item3['genres']) - 1)) {
+                    $Turler = rtrim($Turler, ", ");
+                }
+            }
+
         }
 
-        $InsertFilm = $Baglanti->prepare("insert into filmler(filmadi, yonetmen, senarist, yil, oyuncular, orjinaladi, ozet, poster, dil)
-    values (?,?,?,?,?,?,?,?,?)");
-        $InsertFilm->execute([$Baslik, $Yonetmen, $Senarist, $Tarih, $Oyuncular, $OrjBaslik, $Ozet, $Poster, $Dil]);
+
+        $KontrolSorgu = $Baglanti->prepare("select * from filmler where filmadi = ?");
+        $KontrolSorgu->execute([$Baslik]);
+        if ($KontrolSorgu->rowCount() == 0) {
+            $InsertFilm = $Baglanti->prepare("insert into filmler(filmadi, yonetmen, senarist, yil, oyuncular, orjinaladi, ozet, poster, dil, turler)
+            values (?,?,?,?,?,?,?,?,?,?)");
+            $InsertFilm->execute([$Baslik, $Yonetmen, $Senarist, $Tarih, $Oyuncular, $OrjBaslik, $Ozet, $Poster, $Dil, $Turler]);
+            $sayac++;
+        }
+
+
     }
 
+    echo $sayac . " kadar film eklendi.";
 
 }
 

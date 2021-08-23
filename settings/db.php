@@ -3,8 +3,12 @@
 $user = "root";
 $pass = "";
 
-ob_start();
-session_start();
+
+if(!isset($_SESSION))
+{
+    ob_start();
+    session_start();
+}
 
 try {
     $Baglanti = new PDO("mysql:host=localhost; dbname=reything", $user, $pass);
