@@ -47,22 +47,30 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($Filmler as $Rows) { ?>
 
                 <div class="col-md-4 mb-3 float-start">
-                    <a href="index.php?SS=2&IID=<?php echo $Rows["id"]; ?>" class="alt-cizgisiz">
-                        <div class="card m-auto" style="width: 18rem;">
-                            <img src="<?php echo $Rows["poster"]; ?>"
-                                 class="card-img-top" style="height: 425px">
-                            <div class="card-footer bg-light">
-                                <div class="progress mt-1 mb-1">
-                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                         aria-valuemin="0" aria-valuemax="100">25%
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item fw-bold mt-2"><h5><?php echo $Rows["filmadi"]; ?></h5></li>
-                            </ul>
+            <a href="index.php?SS=2&IID=<?php echo $Rows["id"]; ?>" class="alt-cizgisiz">
+                <div class="card m-auto" style="width: 18rem;">
+                <img src="<?php echo $Rows["poster"]; ?>"
+                     class="card-img-top" style="height: 425px">
+                <div class="card-footer bg-light">
+                    <div class="progress mt-1 mb-1">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                             aria-valuemin="0" aria-valuemax="100">25%
                         </div>
-                    </a>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item fw-bold mt-2"><h5><?php
+                                        $FilmIsmi = $Rows["filmadi"];
+                                       if(strlen($FilmIsmi) >= 20){
+                                            echo substr($FilmIsmi, 0,22). "...";
+                                       } else {
+                                           echo $FilmIsmi;
+                                       }
+
+                                        ?></h5></li>
+                </ul>
+                </div>
+                </a>
                 </div>
 
             <?php } ?>
@@ -88,7 +96,8 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
                                              href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi + 1; ?>"><?php echo $KatSayfaSayisi + 2; ?></a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo $SayfaSayisi -1?>">Son Sayfa</a>
+                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo $SayfaSayisi - 1 ?>">Son
+                            Sayfa</a>
                     </li>
                 </ul>
             </nav>
@@ -118,7 +127,8 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
                                              href="index.php?SS=6&SayfaSayisi=<?php echo $KatSayfaSayisi; ?>"><?php echo $KatSayfaSayisi + 1; ?></a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo $SayfaSayisi - 1 ?>">Son Sayfa</a>
+                        <a class="page-link" href="index.php?SS=6&SayfaSayisi=<?php echo $SayfaSayisi - 1 ?>">Son
+                            Sayfa</a>
                     </li>
                 </ul>
             </nav>
