@@ -1,10 +1,19 @@
+<?php
+include("settings/db.php");
+$FilmIDGetir = $_GET["IID"];
+
+$IcerikGetir = $Baglanti->prepare("select * from filmler where id = ?");
+$IcerikGetir->execute([$FilmIDGetir]);
+$Icerikler = $IcerikGetir->fetch(PDO::FETCH_ASSOC);
+
+?>
 <div class="container-fluid" style="background-color: #002436;">
     <div class="container" style="min-height: 500px;">
         <div class="row">
 
             <div class="col-md-4 mt-4 mb-2">
                 <div class="card" style="width: 25rem; background-color: #001B29">
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6zBWSuYW3Ps1nTfeMS8siS4KUaA.jpg"
+                    <img src="<?php echo $Icerikler["poster"]; ?>"
                          class="card-img-top" alt="...">
                     <div class="card-body beyaz-yazi">
                         <p class="card-text text-center">Buraya yazı</p>
@@ -14,19 +23,20 @@
             </div>
 
             <div class="col-md-8 mt-4 beyaz-yazi">
-                <div class="row"><h1>Film Başlığı</h1></div>
-                <div class="row"><p class="text-muted">Gizem, drama (2017)</p></div>
+                <div class="row"><h1><?php echo $Icerikler["filmadi"]; ?></h1></div>
+                <div class="row"><p class="text-muted"><?php echo $Icerikler["turler"]; ?>
+                        (<?php echo substr($Icerikler["yil"], 0, 4); ?>)</p></div>
                 <div class="row">
                     <p class="lead fst-italic">
-                        <small>Kısa bir cümle film ile ilgili. Biraz daha uzun olabilir.</small>
+                        <small><?php echo $Icerikler["tagline"]; ?></small>
                     </p>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
 
                         <div class="progress bg-light" style="height: 25px;">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
+                            <div class="progress-bar" role="progressbar" style="width: <?php echo $Icerikler["puan"]; ?>%;" aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100"><?php echo $Icerikler["puan"]; ?>%
                             </div>
                         </div>
 
@@ -61,21 +71,13 @@
 
                 </div>
                 <div class="row"><h5>Özet</h5></div>
-                <div class="row"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id dui at ligula
-                        elementum mattis. Suspendisse pharetra sagittis fringilla. Interdum et malesuada fames ac ante ipsum
-                        primis in faucibus. In urna dui, sagittis id ligula sed, viverra pharetra risus. Quisque quis orci
-                        ultricies, pellentesque lacus vitae, pharetra arcu. Ut sed ex neque. Suspendisse efficitur eu orci
-                        eu facilisis.
-
-                        Nullam dictum, mi et dignissim condimentum, neque tellus vestibulum augue, eget egestas erat est sit
-                        amet purus. Morbi venenatis aliquet tortor ut condimentum. Proin eu risus nisl. Vivamus id dignissim
-                        nisi. Maecenas suscipit nibh luctus fringilla dignissim. Sed eget dignissim diam. Aliquam erat
-                        volutpat. Vivamus et nisi eu ante mollis blandit at sed nibh.</p></div>
+                <div class="row"><p><?php echo $Icerikler["ozet"]; ?></p></div>
                 <div class="row">
                     <div class="col-6">
-                        <p class="text-muted"><b>Ahmet Kazak</b><br>Yönetmen</p>
+                        <p class="text-muted"><b><?php echo $Icerikler["yonetmen"]; ?></b><br>Yönetmen</p>
                     </div>
-                    <div class="col-6"><p class="text-muted"><b>Süleyman Samet Kaya</b><br>Senarist</p></div>
+                    <div class="col-6"><p class="text-muted"><b><?php echo $Icerikler["senarist"]; ?></b><br>Senarist
+                        </p></div>
                 </div>
             </div>
         </div>
@@ -84,107 +86,43 @@
 
 <!--Tanıtım Bitişi-->
 
+
 <div class="container">
     <div class="row mt-4">
         <p>
         <h3>Oyuncular</h3>
         <p class="lead text-muted">
-            X filminde oynayan 25 oyuncu listelenmiştir.
+            <?php echo $Icerikler["filmadi"]; ?> filminde oynayan oyuncular listelenmiştir.
         </p>
         </p>
 
     </div>
     <div class="row sag-kaydir flex-row flex-nowrap">
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
+        <?php
+        $metin = $Icerikler["oyuncular"];
+        $OyuncuSayisi = substr_count($Icerikler["oyuncular"], ',');
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
+        for ($say = 0; $say <= $OyuncuSayisi; $say++) {
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
+            ?>
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
+            <div class="col mb-3">
+                <div class="card shadow-sm" style="width: 8rem;">
+                    <img src="img/grey.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><?php print_r(explode(",", $metin)[$say]); ?></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
+            <?php
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
+        }
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
+        ?>
 
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col mb-3">
-            <div class="card shadow-sm" style="width: 8rem;">
-                <img src="img/grey.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text fw-bold">İsim Soyisim</p>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
@@ -385,7 +323,8 @@
                 <div class="col">
 
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                  style="height: 100px"></textarea>
                         <label for="floatingTextarea2">Yorum yap</label>
                     </div>
 
@@ -399,13 +338,23 @@
         <div class="col-md-3">
             <ul class="list-group ">
                 <li class="list-group-item border-0"><h5>Etiketler</h5></li>
+
                 <li class="list-group-item border-0">
-                    <button type="button" class="btn btn-secondary btn-sm mt-2">Slim Shady</button>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2">Avengers</button>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2">Kimyacı</button>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2">G.O.R.A.</button>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2">Aliens</button>
-                    <button type="button" class="btn btn-secondary btn-sm mt-2">Love</button>
+                    <?php
+                    $metin2 = $Icerikler["etiketler"];
+                    $EtiketSayisi = substr_count($Icerikler["etiketler"], ',');
+
+                    for ($say2 = 0;
+                         $say2 <= $EtiketSayisi;
+                         $say2++) {
+
+                        ?>
+
+                        <button type="button" class="btn btn-secondary btn-sm mt-2"><?php print_r(explode(",", $metin2)[$say2]); ?></button>
+
+                        <?php
+                    }
+                    ?>
                 </li>
             </ul>
 

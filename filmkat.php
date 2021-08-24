@@ -47,7 +47,7 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($Filmler as $Rows) { ?>
 
                 <div class="col-md-4 mb-3 float-start">
-                    <a href="#" class="alt-cizgisiz">
+                    <a href="index.php?SS=2&IID=<?php echo $Rows["id"]; ?>" class="alt-cizgisiz">
                         <div class="card m-auto" style="width: 18rem;">
                             <img src="<?php echo $Rows["poster"]; ?>"
                                  class="card-img-top" style="height: 425px">

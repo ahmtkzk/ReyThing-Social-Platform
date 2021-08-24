@@ -23,7 +23,7 @@ function file_get_contents_curl($url)
 
 $sayac = 0;
 
-for ($i = 0; $i <= 10000; $i++) {
+for ($i = 0; $i <= 100; $i++) {
     @$JSON = file_get_contents_curl('https://api.themoviedb.org/3/movie/' . $i . '?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=tr-TR');
 
     $URL = "https://api.themoviedb.org/3/movie/" . $i . "?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=tr-TR";
@@ -76,12 +76,41 @@ for ($i = 0; $i <= 10000; $i++) {
         }
 
 
+
+        @$JSONtags = file_get_contents_curl('https://api.themoviedb.org/3/movie/'. $i .'/keywords?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a');
+
+        $URLtags = 'https://api.themoviedb.org/3/movie/'. $i .'/keywords?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a';
+        $KodTags = getHTTPResponseStatusCode($URLtags);
+        $Itemtags = json_decode($JSONtags, true);
+
+        $Etiketler = "";
+
+        for ($tagsay = 0; $tagsay < count($Itemtags['keywords']); $tagsay++) {
+
+            $Etiketler = $Etiketler . $Itemtags['keywords'][$tagsay]['name'] . ", ";
+            if ($tagsay == (count($Itemtags['keywords']) - 1)) {
+                $Etiketler = rtrim($Etiketler, ", ");
+            }
+
+
+        }
+
+
+
+
+        @$JSONEN = file_get_contents_curl('https://api.themoviedb.org/3/movie/' . $i . '?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=en-EN');
+
+        $URLEN = "https://api.themoviedb.org/3/movie/" . $i . "?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=en-EN";
+        $KodEN = getHTTPResponseStatusCode($URLEN);
+        $ItemEN = json_decode($JSONEN);
+        $KisaYazi = $ItemEN->tagline;
+
         $KontrolSorgu = $Baglanti->prepare("select * from filmler where filmadi = ?");
         $KontrolSorgu->execute([$Baslik]);
         if ($KontrolSorgu->rowCount() == 0) {
-            $InsertFilm = $Baglanti->prepare("insert into filmler(filmadi, yonetmen, senarist, yil, oyuncular, orjinaladi, ozet, poster, dil, turler)
-            values (?,?,?,?,?,?,?,?,?,?)");
-            $InsertFilm->execute([$Baslik, $Yonetmen, $Senarist, $Tarih, $Oyuncular, $OrjBaslik, $Ozet, $Poster, $Dil, $Turler]);
+            $InsertFilm = $Baglanti->prepare("insert into filmler(filmadi, yonetmen, senarist, yil, oyuncular, orjinaladi, ozet, poster, dil, turler, tagline, puan, etiketler)
+            values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            $InsertFilm->execute([$Baslik, $Yonetmen, $Senarist, $Tarih, $Oyuncular, $OrjBaslik, $Ozet, $Poster, $Dil, $Turler, $KisaYazi, 0, $Etiketler]);
             $sayac++;
         }
 

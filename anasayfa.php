@@ -1,4 +1,10 @@
+<?php
 
+$FilmCekSorgu = $Baglanti->prepare("select * from filmler order by id desc limit 10");
+$FilmCekSorgu->execute();
+$Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!--
 İlk Kısım
 -->
@@ -31,27 +37,30 @@
     <div class="col mt-3">
         <ul id="autoWidth" class="cs-hidden">
 
+            <?php
+            foreach ($Filmler as $Rows) {
+            ?>
             <!--
             Bir tane slide itemi
             -->
             <li class="item-a">
                 <div class="box">
                     <div class="slide-img">
-                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/6PX0r5TRRU5y0jZ70y1OtbLYmoD.jpg">
+                        <img src="<?php echo $Rows["poster"]?>">
                         <div class="overlay">
-                            <a href="" class="buy-btn alt-cizgisiz">Detaylar...</a>
+                            <a href="index.php?SS=2&IID=<?php echo $Rows["id"]?>" class="buy-btn alt-cizgisiz">Detaylar...</a>
                         </div>
                     </div>
                     <div class="card-footer bg-light">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
+                            <div class="progress-bar" role="progressbar" style="width: <?php echo $Rows["puan"]; ?>%;" aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100"><?php echo $Rows["puan"]; ?>%
                             </div>
                         </div>
                     </div>
                     <div class="detail-box bg-white">
                         <div class="type">
-                            <a class="alt-cizgisiz" href="">Peaky Blinders</a>
+                            <a class="alt-cizgisiz" href=""><?php echo $Rows["filmadi"]?></a>
                             <span></span>
                         </div>
                         <a class="price alt-cizgisiz">Link</a>
@@ -61,126 +70,10 @@
             <!--
             Bir tane slide itemi
             -->
-            <li class="item-a">
-                <div class="box">
-                    <div class="slide-img">
-                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/6PX0r5TRRU5y0jZ70y1OtbLYmoD.jpg">
-                        <div class="overlay">
-                            <a href="" class="buy-btn alt-cizgisiz">Detaylar...</a>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-box bg-white">
-                        <div class="type">
-                            <a class="alt-cizgisiz" href="">Peaky Blinders</a>
-                            <span></span>
-                        </div>
-                        <a class="price alt-cizgisiz">Link</a>
-                    </div>
-                </div>
-            </li>
-            <li class="item-a">
-                <div class="box">
-                    <div class="slide-img">
-                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/6PX0r5TRRU5y0jZ70y1OtbLYmoD.jpg">
-                        <div class="overlay">
-                            <a href="" class="buy-btn alt-cizgisiz">Detaylar...</a>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-box bg-white">
-                        <div class="type">
-                            <a class="alt-cizgisiz" href="">Peaky Blinders</a>
-                            <span></span>
-                        </div>
-                        <a class="price alt-cizgisiz">Link</a>
-                    </div>
-                </div>
-            </li>
-            <li class="item-a">
-                <div class="box">
-                    <div class="slide-img">
-                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/6PX0r5TRRU5y0jZ70y1OtbLYmoD.jpg">
-                        <div class="overlay">
-                            <a href="" class="buy-btn alt-cizgisiz">Detaylar...</a>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-box bg-white">
-                        <div class="type">
-                            <a class="alt-cizgisiz" href="">Peaky Blinders</a>
-                            <span></span>
-                        </div>
-                        <a class="price alt-cizgisiz">Link</a>
-                    </div>
-                </div>
-            </li>
-            <li class="item-a">
-                <div class="box">
-                    <div class="slide-img">
-                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/6PX0r5TRRU5y0jZ70y1OtbLYmoD.jpg">
-                        <div class="overlay">
-                            <a href="" class="buy-btn alt-cizgisiz">Detaylar...</a>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-box bg-white">
-                        <div class="type">
-                            <a class="alt-cizgisiz" href="">Peaky Blinders</a>
-                            <span></span>
-                        </div>
-                        <a class="price alt-cizgisiz">Link</a>
-                    </div>
-                </div>
-            </li>
-            <li class="item-a">
-                <div class="box">
-                    <div class="slide-img">
-                        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/6PX0r5TRRU5y0jZ70y1OtbLYmoD.jpg">
-                        <div class="overlay">
-                            <a href="" class="buy-btn alt-cizgisiz">Detaylar...</a>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-light">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                 aria-valuemin="0" aria-valuemax="100">25%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-box bg-white">
-                        <div class="type">
-                            <a class="alt-cizgisiz" href="">Peaky Blinders</a>
-                            <span></span>
-                        </div>
-                        <a class="price alt-cizgisiz">Link</a>
-                    </div>
-                </div>
-            </li>
+            <?php
+            }
+            ?>
+
         </ul>
     </div>
 </div>
