@@ -58,27 +58,27 @@ if (isset($_GET["SS"])) {
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?SS=8">Kitaplar</a>
                 </li>
-                <li class="nav-item">
-                    <a aria-disabled="true" class="nav-link disabled" href="#" tabindex="-1">Kapalı</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                       id="dropdown07XL">Açılır</a>
-                    <ul aria-labelledby="dropdown07XL" class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Item-1</a></li>
-                        <li><a class="dropdown-item" href="#">Item-1</a></li>
-                        <li><a class="dropdown-item" href="#">Item-1</a></li>
-                    </ul>
-                </li>
+
             </ul>
             <form>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php
                     if (isset($_SESSION["Kullanici"])) {
-                        echo $_SESSION["Kullanici"];
-                        ?>
 
-                        <a href="cikis.php">Çıkış yap</a>
+                        ?>
+                        <div class="dropdown">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong class="me-2"><?php echo $_SESSION["Kullanici"]?></strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                                <li><a class="dropdown-item" href="#">Profilime git</a></li>
+                                <li><a class="dropdown-item" href="#">Yeni ekle</a></li>
+                                <li><a class="dropdown-item" href="#">Ayarlar</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="cikis.php">Çıkış yap</a></li>
+                            </ul>
+                        </div>
 
                         <?php
                     } else {
