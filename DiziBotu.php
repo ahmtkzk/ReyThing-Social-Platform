@@ -68,7 +68,6 @@ for ($i = 0; $i <= 10000; $i++) {
 
     }
 
-
     $KontrolSorgu = $Baglanti->prepare("select * from diziler where diziadi = ?");
     $KontrolSorgu->execute([$Baslik]);
     if ($KontrolSorgu->rowCount() == 0) {

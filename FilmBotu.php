@@ -63,9 +63,8 @@ for ($i = 0; $i <= 10000; $i++) {
         }
 
         for ($k = 0; $k < count($Item2['crew']); $k++) {
-            if ($Item2['crew'][$k]['job'] == "Writer") {
-                $Senarist = $Item2['crew'][$k]['name'];;
-            }
+
+
             if ($Item2['crew'][$k]['job'] == "Director") {
                 $Yonetmen = $Item2['crew'][$k]['name'];;
             }
@@ -111,9 +110,9 @@ for ($i = 0; $i <= 10000; $i++) {
         $KontrolSorgu = $Baglanti->prepare("select * from filmler where filmadi = ?");
         $KontrolSorgu->execute([$Baslik]);
         if ($KontrolSorgu->rowCount() == 0) {
-            $InsertFilm = $Baglanti->prepare("insert into filmler(filmadi, yonetmen, senarist, yil, oyuncular, orjinaladi, ozet, poster, dil, turler, tagline, puan, etiketler)
-            values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            $InsertFilm->execute([$Baslik, $Yonetmen, $Senarist, $Tarih, $Oyuncular, $OrjBaslik, $Ozet, $Poster, $Dil, $Turler, $KisaYazi, 0, $Etiketler]);
+            $InsertFilm = $Baglanti->prepare("insert into filmler(filmadi, yonetmen, yil, oyuncular, orjinaladi, ozet, poster, dil, turler, tagline, puan, etiketler)
+            values (?,?,?,?,?,?,?,?,?,?,?,?)");
+            $InsertFilm->execute([$Baslik, $Yonetmen, $Tarih, $Oyuncular, $OrjBaslik, $Ozet, $Poster, $Dil, $Turler, $KisaYazi, 0, $Etiketler]);
             $sayac++;
         }
 
@@ -123,6 +122,4 @@ for ($i = 0; $i <= 10000; $i++) {
     echo $sayac . " kadar film eklendi.";
 
 }
-
-
 ?>
