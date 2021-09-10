@@ -18,7 +18,6 @@ if ($YorumSayisi > 0) {
 
 } else {
     $PuanHesapla = 0;
-
 }
 
 ?>
@@ -30,10 +29,11 @@ if ($YorumSayisi > 0) {
                 <div class="card" style="width: 25rem; background-color: #001B29">
                     <img src="<?php echo $Icerikler["poster"]; ?>"
                          class="card-img-top" alt="...">
-                    <div class="card-body beyaz-yazi">
-                        <p class="card-text text-center">Buraya yazı</p>
-
-                    </div>
+                    <!--
+                     <div class="card-body beyaz-yazi">
+                         <p class="card-text text-center">Buraya yazı</p>
+                     </div>
+                     -->
                 </div>
             </div>
 
@@ -99,8 +99,6 @@ if ($YorumSayisi > 0) {
                     <div class="col-6">
                         <p class="text-muted"><b><?php echo $Icerikler["yonetmen"]; ?></b><br>Yönetmen</p>
                     </div>
-                    <div class="col-6"><p class="text-muted"><b><?php echo $Icerikler["senarist"]; ?></b><br>Senarist
-                        </p></div>
                 </div>
             </div>
         </div>
@@ -250,8 +248,12 @@ if ($YorumSayisi > 0) {
                                     <h2>Yorum yapmak için giriş yapman gerek!</h2>
                                     <p>Henüz giriş yapmadığından dolayı yorum yapamazsın. Yorum yapmak için giriş yap,
                                         henüz kaydolmadıysan aşağıdaki butondan hızlıca kayıt olabilirsin!</p>
-                                    <a href="index.php?SS=4"><button class="btn btn-outline-light me-2" type="button">Giriş yap</button></a>
-                                    <a href="index.php?SS=3"><button type="button" class="btn btn-light">Kaydol</button></a>
+                                    <a href="index.php?SS=4">
+                                        <button class="btn btn-outline-light me-2" type="button">Giriş yap</button>
+                                    </a>
+                                    <a href="index.php?SS=3">
+                                        <button type="button" class="btn btn-light">Kaydol</button>
+                                    </a>
                                 </div>
                             </div>
 

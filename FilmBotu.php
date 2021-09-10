@@ -42,7 +42,6 @@ for ($i = 0; $i <= 10000; $i++) {
             $Poster = "img/bosafisson.jpg";
         } else {
             $Poster = "https://image.tmdb.org/t/p/w500" . $Item->poster_path;
-
         }
         $Dil = $Item->original_language;
 

@@ -1,3 +1,10 @@
+<?php
+
+if(isset($_SESSION["Kullanici"])){
+    header("Location:index.php");
+}
+
+?>
 <div class="container">
     <main>
         <div class="py-5 text-center">

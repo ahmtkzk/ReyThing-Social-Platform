@@ -34,9 +34,9 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
                 <a class="nav-link disabled" href="#"><h5>Kategoriler</h5>
                     <hr>
                 </a>
-                <a class="nav-link" href="#">Filmler</a>
-                <a class="nav-link" href="#">Diziler</a>
-                <a class="nav-link" href="#">Kitaplar</a>
+                <a class="nav-link" href="index.php?SS=6">Filmler</a>
+                <a class="nav-link" href="index.php?SS=7">Diziler</a>
+                <a class="nav-link" href="index.php?SS=8">Kitaplar</a>
                 <a class="nav-link" href="#">Popüler</a>
                 <a class="nav-link" href="#">En sevilenler</a>
             </nav>
@@ -44,33 +44,49 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="col-md-9 mt-3">
 
-            <?php foreach ($Filmler as $Rows) { ?>
+            <?php foreach ($Filmler as $Rows) {
 
-                <div class="col-md-4 mb-3 float-start">
-            <a href="index.php?SS=2&IID=<?php echo $Rows["id"]; ?>" class="alt-cizgisiz">
-                <div class="card m-auto" style="width: 18rem;">
-                <img src="<?php echo $Rows["poster"]; ?>"
-                     class="card-img-top" style="height: 425px">
-                <div class="card-footer bg-light">
-                    <div class="progress mt-1 mb-1">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                             aria-valuemin="0" aria-valuemax="100">25%
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item fw-bold mt-2"><h5><?php
+                $YorumlarGetirSorgu = $Baglanti->prepare("select * from yorumlar where filmid = ?");
+                $YorumlarGetirSorgu->execute([$Rows["id"]]);
+                $YorumSayisi = $YorumlarGetirSorgu->rowCount();
+                $Yorumlar = $YorumlarGetirSorgu->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($YorumSayisi > 0) {
+                    $PuanHesapla = floor(($Rows["puan"] / $YorumSayisi) * 10);
+
+                } else {
+                    $PuanHesapla = 0;
+                }
+
+                ?>
+
+                <div class="col-xl-4 col-sm-12 mb-3 float-start">
+                    <a href="index.php?SS=2&IID=<?php echo $Rows["id"]; ?>" class="alt-cizgisiz">
+                        <div class="card m-auto" style="width: 18rem;">
+                            <img src="<?php echo $Rows["poster"]; ?>"
+                                 class="card-img-top" style="height: 425px">
+                            <div class="card-footer bg-light">
+                                <div class="progress mt-1 mb-1">
+                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $PuanHesapla;?>%;" aria-valuenow="25"
+                                         aria-valuemin="0" aria-valuemax="100"><?php echo $PuanHesapla;?>%
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item fw-bold mt-2"><h5><?php
                                         $FilmIsmi = $Rows["filmadi"];
-                                       if(strlen($FilmIsmi) >= 20){
-                                            echo substr($FilmIsmi, 0,22). "...";
-                                       } else {
-                                           echo $FilmIsmi;
-                                       }
+                                        if (strlen($FilmIsmi) >= 20) {
+                                            echo substr($FilmIsmi, 0, 22) . "...";
+                                        } else {
+                                            echo $FilmIsmi;
+                                        }
 
-                                        ?></h5></li>
-                </ul>
-                </div>
-                </a>
+                                        ?>
+                                    </h5>
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
                 </div>
 
             <?php } ?>

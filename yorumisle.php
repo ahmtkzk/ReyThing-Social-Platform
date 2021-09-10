@@ -1,5 +1,8 @@
 <?php
 include "settings/db.php";
+
+$OncekiURL = $_SERVER['HTTP_REFERER'];
+
 $Yorum = $_POST["yorum"];
 $IcerikID = $_GET["IIDY"];
 $KullaniciAdi = $_SESSION["Kullanici"];
@@ -24,5 +27,7 @@ $GuncelPuan = $PuanKac + $Puan;
 $IcerikGetir = $Baglanti->prepare("update filmler set puan = ? where id = ?");
 $IcerikGetir->execute([$GuncelPuan, $IcerikID]);
 $Icerikler = $IcerikGetir->fetch(PDO::FETCH_ASSOC);
+
+header("Location:" . $OncekiURL);
 
 ?>

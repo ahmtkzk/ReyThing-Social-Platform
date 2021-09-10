@@ -38,9 +38,13 @@ for ($i = 0; $i <= 10000; $i++) {
         $Tarih = $Item->first_air_date;
         $Ozet = $Item->overview;
         $SezonSayisi = $Item->last_episode_to_air->season_number;
-        $Poster = "https://image.tmdb.org/t/p/w500" . $Item->poster_path;
+        $PosterGiris = $Item->poster_path;
         $Dil = $Item->original_language;
-
+        if ($PosterGiris == "") {
+            $Poster = "img/bosafisson.jpg";
+        } else {
+            $Poster = "https://image.tmdb.org/t/p/w500" . $Item->poster_path;
+        }
         @$JSON2 = file_get_contents_curl('https://api.themoviedb.org/3/tv/' . $i . '/credits?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=tr-TR');
 
         $URL2 = "https://api.themoviedb.org/3/tv/" . $i . "/credits?api_key=f121c3aff0efc3d4fd2b9d3edc8e221a&language=tr-TR";
