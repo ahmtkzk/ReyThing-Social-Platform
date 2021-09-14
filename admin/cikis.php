@@ -2,6 +2,6 @@
 ob_start();
 session_start();
 $OncekiURL = $_SERVER['HTTP_REFERER'];
-unset($_SESSION["Kullanici"]);
+unset($_SESSION["Admin"]);
 header("Location:" . $OncekiURL);
 ?>

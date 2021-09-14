@@ -8,7 +8,8 @@ $GirisKontrolu = $Baglanti->prepare("select * from yetkilikullanici where email 
 $GirisKontrolu->execute([$Kadi, md5($Pass)]);
 
 if($GirisKontrolu->rowCount() == 1){
-    echo "başarılı";
+    $_SESSION["Admin"] = $Kadi;
+    header("Location:anasayfa.php");
 } else {
     echo "yanlış";
 }
