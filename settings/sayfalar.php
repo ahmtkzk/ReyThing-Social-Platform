@@ -9,6 +9,6 @@ $SayfaNumarasi[5] = "icerik.php";
 $SayfaNumarasi[6] = "filmkat.php";
 $SayfaNumarasi[7] = "dizikat.php";
 $SayfaNumarasi[8] = "kitapkat.php";
-$SayfaNumarasi[9] = "";
+$SayfaNumarasi[9] = "filmekle.php";
 
 ?>

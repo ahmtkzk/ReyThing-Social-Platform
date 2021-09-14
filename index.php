@@ -67,15 +67,21 @@ if (isset($_GET["SS"])) {
 
                         ?>
                         <div class="dropdown">
-                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                                <strong class="me-2"><?php echo $_SESSION["Kullanici"]?></strong>
+                            <a href="#"
+                               class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                     class="rounded-circle me-2">
+                                <strong class="me-2"><?php echo $_SESSION["Kullanici"] ?></strong>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
+                                aria-labelledby="dropdownUser1">
                                 <li><a class="dropdown-item" href="#">Profilime git</a></li>
                                 <li><a class="dropdown-item" href="#">Yeni ekle</a></li>
                                 <li><a class="dropdown-item" href="#">Ayarlar</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="cikis.php">Çıkış yap</a></li>
                             </ul>
                         </div>
@@ -93,7 +99,7 @@ if (isset($_GET["SS"])) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a aria-current="page" class="nav-link" href="#">
+                            <a aria-current="page" class="nav-link" href="index.php?SS=9">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                      class="bi bi-plus" viewBox="0 0 16 16">
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
