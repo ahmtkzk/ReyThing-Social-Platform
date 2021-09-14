@@ -1,88 +1,79 @@
-<div class="container mt-4">
+<div class="container mt-4 mb-5">
     <div class="row">
         <form>
+            <div class="row mb-3 mt-3">
+                <h1 class="display-6">Film ekle</h1>
+            </div>
+
             <div class="row mb-3">
-                <label for="filmadi" class="col-sm-2 col-form-label">Email</label>
+                <label for="filmadi" class="col-sm-2 col-form-label">Film adı</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="filmadi">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="filmadi" class="col-sm-2 col-form-label">Email</label>
+                <label for="yonetmen" class="col-sm-2 col-form-label">Yönetmen</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="filmadi">
+                    <input type="text" class="form-control" id="yonetmen">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="filmadi" class="col-sm-2 col-form-label">Email</label>
+                <label for="tarih" class="col-sm-2 col-form-label">Tarih</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="filmadi">
+                    <input type="text" class="form-control" id="tarih">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="filmadi" class="col-sm-2 col-form-label">Email</label>
+                <label for="oyuncular" class="col-sm-2 col-form-label">Oyuncular</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="filmadi">
+                    <input type="text" class="form-control" id="oyuncular">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="filmadi" class="col-sm-2 col-form-label">Email</label>
+                <label for="ozet" class="col-sm-2 col-form-label">Özet</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="filmadi">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="ozet"
+                              style="height: 100px"></textarea>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="filmadi" class="col-sm-2 col-form-label">Email</label>
+                <label for="poster" class="col-sm-2 col-form-label">Poster</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="filmadi">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword3">
-                </div>
-            </div>
-            <fieldset class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            First radio
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                            Second radio
-                        </label>
-                    </div>
-                    <div class="form-check disabled">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                        <label class="form-check-label" for="gridRadios3">
-                            Third disabled radio
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="row mb-3">
-                <div class="col-sm-10 offset-sm-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                        <label class="form-check-label" for="gridCheck1">
-                            Example checkbox
-                        </label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="poster" aria-describedby="inputGroupFileAddon04"
+                               aria-label="Upload">
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+
+            <div class="row mb-3">
+                <label for="orjinal" class="col-sm-2 col-form-label">Orjinal dil</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="orjinal">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="turler" class="col-sm-2 col-form-label">Türler</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="turler">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="etiketler" class="col-sm-2 col-form-label">Etiketler</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="etiketler">
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Ekle</button>
         </form>
     </div>
 </div>
