@@ -16,8 +16,8 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
                 yapın,
                 puan verin.
             </p>
-            <button class="btn btn-primary btn-lg" type="button">Kaydol</button>
-            <button type="button" class="btn btn-outline-primary btn-lg m-2">Giriş Yap</button>
+            <a href="index.php?SS=3"><button class="btn btn-primary btn-lg" type="button">Kaydol</button></a>
+            <a href="index.php?SS=4"><button type="button" class="btn btn-outline-primary btn-lg m-2">Giriş Yap</button></a>
         </div>
     </div>
     <br>
@@ -118,8 +118,8 @@ $Filmler = $FilmCekSorgu->fetchAll(PDO::FETCH_ASSOC);
 -->
 <div class="container sag-kaydir">
     <div class="row p-lg-4 mt-2"><h3>
-            Trendler
-            <small class="text-muted lead">Kullanıcılar arasında popüler olan içerikler.</small>
+            Diziler
+            <small class="text-muted lead">Son eklenen içerikler.</small>
         </h3></div>
     <div class="col mt-3">
         <ul id="lightSlider">
